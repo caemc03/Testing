@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>แบบฝึกหัดทบทวนความรู้ผลิตภัณฑ์สุขภาพ</title>
+  <title>การปราบปรามและบังคับใช้กฎหมาย (Enforcement)</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -159,7 +159,7 @@
 <div class="wrap">
 
   <div class="page-header">
-    <h1>แบบฝึกหัดทบทวนความรู้ผลิตภัณฑ์สุขภาพ</h1>
+    <h1>การปราบปรามและบังคับใช้กฎหมาย (Enforcement)</h1>
     <p>กรอกข้อมูลให้ครบถ้วนแล้วกดส่งคำตอบ</p>
   </div>
 
@@ -171,6 +171,7 @@
     <div class="inline-fields">
       <label>ชื่อ-นามสกุล <input type="text" id="q1_name" placeholder="กรอกชื่อ-นามสกุล" /></label>
       <label>ตำแหน่ง <input type="text" id="q1_position" placeholder="กรอกตำแหน่ง" /></label>
+      <label>กลุ่ม <input type="text" id="q1_group" placeholder="กรอกกลุ่ม" /></label>
       <label>หน่วยงาน <input type="text" id="q1_unit" placeholder="กรอกหน่วยงาน" /></label>
     </div>
   </div>
@@ -265,6 +266,18 @@
     <input type="text" id="q11" placeholder="ระบุชื่อหัวข้อที่ท่านคิดว่าเหมาะสม..." />
   </div>
 
+  <!-- ข้อ 12 -->
+  <div class="card card-q11">
+    <span class="q-label"><span class="q-num" style="background:#E6F1FB;color:#185FA5;">12</span>ในการทำงานปัจจุบัน ทางจังหวัดอยากให้มีการปรับปรุงแก้ไข พรบ. ใด และมาตราใดบ้าง จงเสนอแนะ</span>
+    <textarea id="q12" placeholder="ระบุ พรบ. มาตรา และข้อเสนอแนะในการปรับปรุงแก้ไข..."></textarea>
+  </div>
+
+  <!-- ข้อ 13 -->
+  <div class="card card-q11">
+    <span class="q-label"><span class="q-num" style="background:#E6F1FB;color:#185FA5;">13</span>การทำงานบังคับใช้กฎหมายระหว่างส่วนกลางและจังหวัดที่ผ่านมานั้น ท่านมีอุปสรรคด้านใดบ้าง พร้อมข้อเสนอแนะ</span>
+    <textarea id="q13" placeholder="ระบุอุปสรรคและข้อเสนอแนะ..."></textarea>
+  </div>
+
   <button class="submit-btn" id="submitBtn" onclick="submitForm()">ส่งคำตอบ</button>
 
 </div>
@@ -335,6 +348,7 @@
       timestamp: new Date().toLocaleString('th-TH'),
       q1_name: document.getElementById('q1_name').value,
       q1_position: document.getElementById('q1_position').value,
+      q1_group: document.getElementById('q1_group').value,
       q1_unit: document.getElementById('q1_unit').value,
       q2_product: document.getElementById('q2_product').value,
       q2_lot: document.getElementById('q2_lot').value,
@@ -351,6 +365,8 @@
       q9: document.getElementById('q9').value,
       q10: document.getElementById('q10').value,
       q11: document.getElementById('q11').value,
+      q12: document.getElementById('q12').value,
+      q13: document.getElementById('q13').value,
     };
 
     try {
