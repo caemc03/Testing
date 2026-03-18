@@ -207,7 +207,7 @@
 
   <!-- ข้อ 4 -->
   <div class="card">
-    <span class="q-label"><span class="q-num">4</span>จากรูปภาพผลิตภัณฑ์ดังกล่าว ท่านควรศึกษาข้อมูลใดบ้าง? <small style="font-weight:400;color:#888;">(เลือกได้มากกว่า 1 ข้อ)</small></span>
+    <span class="q-label"><span class="q-num">4</span>จากรูปภาพผลิตภัณฑ์ดังกล่าว ท่านจะหาข้อมูลด้านใดบ้าง เพื่อประกอบการดำเนินการ <small style="font-weight:400;color:#888;">(เลือกได้มากกว่า 1 ข้อ)</small></span>
     <div class="check-group">
       <label class="check-item"><input type="checkbox" class="q4" value="ข้อมูลใบอนุญาต/ที่ตั้งสถานที่" /> ข้อมูลใบอนุญาต/ที่ตั้งสถานที่</label>
       <label class="check-item"><input type="checkbox" class="q4" value="ข้อมูลผลิตภัณฑ์" /> ข้อมูลผลิตภัณฑ์</label>
@@ -224,7 +224,7 @@
 
   <!-- ข้อ 6 -->
   <div class="card">
-    <span class="q-label"><span class="q-num">6</span>ท่านต้องเก็บตัวอย่างส่งตรวจวิเคราะห์หรือไม่?</span>
+    <span class="q-label"><span class="q-num">6</span>ท่านจะดำเนินการเก็บตัวอย่างส่งตรวจวิเคราะห์หรือไม่ พร้อมระบุเหตุผล</span>
     <div class="radio-group">
       <label class="radio-item"><input type="radio" name="q6" value="ส่ง" onchange="toggleQ7()" /> ส่ง</label>
       <label class="radio-item"><input type="radio" name="q6" value="ไม่ส่ง" onchange="toggleQ7()" /> ไม่ส่ง</label>
@@ -233,13 +233,13 @@
 
   <!-- ข้อ 7 -->
   <div class="card" id="card_q7">
-    <span class="q-label"><span class="q-num" id="q7_num">7</span>หากท่านเก็บตัวอย่างส่งตรวจวิเคราะห์ ท่านจะวิเคราะห์หาสิ่งใดบ้าง?</span>
+    <span class="q-label"><span class="q-num" id="q7_num">7</span>หากเก็บตัวอย่างส่งตรวจวิเคราะห์ ท่านจะตรวจวิเคราะห์หาสิ่งใดบ้าง?</span>
     <textarea id="q7" placeholder="ระบุสิ่งที่ต้องการวิเคราะห์..."></textarea>
   </div>
 
   <!-- ข้อ 8 -->
   <div class="card">
-    <span class="q-label"><span class="q-num">8</span>จากข้อมูลรูปภาพ จงวิเคราะห์ฐานความผิด</span>
+    <span class="q-label"><span class="q-num">8</span>จากข้อมูลข้อ 2 - 7 จงวิเคราะห์ว่าเป็นฐานความผิดใด</span>
     <div class="inline-fields">
       <label>พรบ. <input type="text" id="q8_law" placeholder="ชื่อพระราชบัญญัติ" /></label>
       <label>มาตรา <input type="text" id="q8_section" placeholder="หมายเลขมาตรา" /></label>
@@ -260,21 +260,22 @@
 
   <!-- ข้อ 11 -->
   <div class="card">
-    <span class="q-label"><span class="q-num">11</span>จากแบบทดสอบ ท่านจะตั้งชื่อหัวข้อการทดสอบนี้ว่าอย่างไร?</span>
-    <input type="text" id="q11" placeholder="ระบุชื่อหัวข้อที่ท่านคิดว่าเหมาะสม..." />
+    <span class="q-label"><span class="q-num">11</span>จากแบบทดสอบ ท่านจะตั้งชื่อการดำเนินการนี้ว่าอย่างไร?</span>
+    <input type="text" id="q11" placeholder="ระบุชื่อการดำเนินการที่ท่านคิดว่าเหมาะสม..." />
   </div>
 
   <!-- ข้อ 12 -->
   <div class="card">
-    <span class="q-label"><span class="q-num">12</span>ในการทำงานปัจจุบัน ทางจังหวัดอยากให้มีการปรับปรุงแก้ไข พรบ. ใด และมาตราใดบ้าง จงเสนอแนะ</span>
-    <textarea id="q12" placeholder="ระบุ พรบ. มาตรา และข้อเสนอแนะในการปรับปรุงแก้ไข..."></textarea>
-  </div>
+    <span class="q-label"><span class="q-num">12</span>การทำงานบังคับใช้กฎหมายระหว่างส่วนกลางและจังหวัดที่ผ่านมานั้น ท่านมีอุปสรรคด้านใดบ้าง พร้อมข้อเสนอแนะ</span>
+    <textarea id="q12" placeholder="ระบุอุปสรรคและข้อเสนอแนะ..."></textarea>
+  </div>  
 
   <!-- ข้อ 13 -->
   <div class="card">
-    <span class="q-label"><span class="q-num">13</span>การทำงานบังคับใช้กฎหมายระหว่างส่วนกลางและจังหวัดที่ผ่านมานั้น ท่านมีอุปสรรคด้านใดบ้าง พร้อมข้อเสนอแนะ</span>
-    <textarea id="q13" placeholder="ระบุอุปสรรคและข้อเสนอแนะ..."></textarea>
+    <span class="q-label"><span class="q-num">13</span>ในการทำงานปัจจุบัน ทางจังหวัดอยากให้มีการปรับปรุงแก้ไข พรบ. ใด และมาตราใดบ้าง จงเสนอแนะ</span>
+    <textarea id="q13" placeholder="ระบุ พรบ. มาตรา และข้อเสนอแนะในการปรับปรุงแก้ไข..."></textarea>
   </div>
+  
 
   <button class="submit-btn" id="submitBtn" onclick="submitForm()">ส่งคำตอบ</button>
 
