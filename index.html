@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แบบฝึกหัดทบทวนความรู้ผลิตภัณฑ์สุขภาพ</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: #f5f6f8;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; }
+    .page-header {
+      background: #fff;
+      border-radius: 14px;
+      border-left: 5px solid #1D9E75;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .page-header h1 { font-size: 20px; font-weight: 700; color: #0F6E56; }
+    .page-header p { font-size: 14px; color: #666; margin-top: 4px; }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border: 1px solid #e8ebe8;
+    }
+    .card.disabled { opacity: 0.38; pointer-events: none; }
+    .q-label { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 10px; display: block; line-height: 1.6; }
+    .q-num {
+      display: inline-block;
+      background: #E1F5EE;
+      color: #0F6E56;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-right: 7px;
+    }
+    .q-num.skipped { background: #f0f0f0; color: #999; }
+    .skip-badge {
+      display: inline-block;
+      background: #f0f0f0;
+      color: #999;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      border: 1px solid #d8dbd8;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #1a1a1a;
+      background: #fafafa;
+      transition: border-color 0.15s;
+    }
+    input[type="text"]:focus, textarea:focus {
+      outline: none;
+      border-color: #1D9E75;
+      background: #fff;
+    }
+    input[type="text"] { height: 40px; }
+    textarea { resize: vertical; min-height: 72px; }
+    .inline-fields { display: flex; gap: 10px; flex-wrap: wrap; }
+    .inline-fields label {
+      font-size: 12px;
+      color: #555;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+      min-width: 140px;
+    }
+    .check-group { display: flex; flex-direction: column; gap: 10px; }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #1a1a1a;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 7px;
+      transition: background 0.1s;
+    }
+    .check-item:hover { background: #f0faf6; }
+    .check-item input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: #1D9E75;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #1a1a1a;
+      cursor: pointer;
+      padding: 7px 16px;
+      border-radius: 8px;
+      border: 1px solid #d8dbd8;
+      transition: all 0.15s;
+    }
+    .radio-item:hover { border-color: #1D9E75; background: #f0faf6; }
+    .radio-item input[type="radio"] {
+      accent-color: #1D9E75;
+      width: 15px; height: 15px;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: #1D9E75;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: #0F6E56; }
+    .submit-btn:disabled { background: #9FE1CB; cursor: not-allowed; }
+    .status-msg {
+      font-size: 14px;
+      padding: 12px 16px;
+      border-radius: 9px;
+      margin-bottom: 1rem;
+      display: none;
+      font-weight: 500;
+    }
+    .status-ok { background: #E1F5EE; color: #0F6E56; display: block; border: 1px solid #9FE1CB; }
+    .status-err { background: #FEECEC; color: #c0392b; display: block; border: 1px solid #f5b7b1; }
+    .card-q11 { border-color: #b5d4f4; background: #f7fbff; }
+    .card-q11 .q-num { background: #E6F1FB; color: #185FA5; }
+    @media (max-width: 500px) {
+      .inline-fields label { min-width: 100%; }
+      .radio-group { flex-direction: column; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="page-header">
+    <h1>แบบฝึกหัดทบทวนความรู้ผลิตภัณฑ์สุขภาพ</h1>
+    <p>กรอกข้อมูลให้ครบถ้วนแล้วกดส่งคำตอบ</p>
+  </div>
+
+  <div id="statusMsg" class="status-msg"></div>
+
+  <!-- ข้อ 1 -->
+  <div class="card">
+    <span class="q-label"><span class="q-num">1</span>ข้อมูลผู้ตอบแบบทดสอบ</span>
+    <div class="inline-fields">
+      <label>ชื่อ-นามสกุล <input type="text" id="q1_name" placeholder="กรอกชื่อ-นามสกุล" /></label>
+      <label>ตำแหน่ง <input type="text" id="q1_position" placeholder="กรอกตำแหน่ง" /></label>
+      <label>หน่วยงาน <input type="text" id="q1_unit" placeholder="กรอกหน่วยงาน" /></label>
+    </div>
+  </div>
+
+  <!-- ข้อ 2 -->
+  <div class="card">
+    <span class="q-label"><span class="q-num">2</span>จากรูปที่ทางเจ้าหน้าที่ตำรวจส่งมา ท่านพบจุดสังเกตอะไรบ้าง?</span>
+    <div class="inline-fields" style="margin-bottom:12px;">
+      <label>ภาพผลิตภัณฑ์ <input type="text" id="q2_product" placeholder="ชื่อผลิตภัณฑ์" /></label>
+      <label>รุ่นการผลิต <input type="text" id="q2_lot" placeholder="Lot/รุ่น" /></label>
+      <label>MFG <input type="text" id="q2_mfg" placeholder="วันผลิต" /></label>
+      <label>EXP <input type="text" id="q2_exp" placeholder="วันหมดอายุ" /></label>
+    </div>
+    <span class="q-label" style="margin-bottom:8px;">Sticker Hologram</span>
+    <div class="radio-group">
+      <label class="radio-item"><input type="radio" name="q2_holo" value="มี" /> มี</label>
+      <label class="radio-item"><input type="radio" name="q2_holo" value="ไม่มี" /> ไม่มี</label>
+      <label class="radio-item"><input type="radio" name="q2_holo" value="ไม่ชัดเจน" /> ไม่ชัดเจน</label>
+    </div>
+  </div>
+
+  <!-- ข้อ 3 -->
+  <div class="card">
+    <span class="q-label"><span class="q-num">3</span>ท่านสามารถเข้าถึงแหล่งข้อมูลผ่านช่องทางใดได้บ้าง? <small style="font-weight:400;color:#888;">(เลือกได้มากกว่า 1 ข้อ)</small></span>
+    <div class="check-group">
+      <label class="check-item"><input type="checkbox" class="q3" value="Skynet" /> Skynet</label>
+      <label class="check-item"><input type="checkbox" class="q3" value="FDA Reporter" /> FDA Reporter</label>
+      <label class="check-item"><input type="checkbox" class="q3" value="Drug Alert" /> Drug Alert</label>
+      <label class="check-item"><input type="checkbox" class="q3" value="TAWAI" /> TAWAI</label>
+      <label class="check-item"><input type="checkbox" class="q3" value="Safety Alert" /> Safety Alert</label>
+      <label class="check-item"><input type="checkbox" class="q3" value="อื่นๆ" id="q3_other_check" /> อื่นๆ</label>
+    </div>
+    <input type="text" id="q3_other" placeholder="ระบุช่องทางอื่น" style="margin-top:10px;display:none;" />
+  </div>
+
+  <!-- ข้อ 4 -->
+  <div class="card">
+    <span class="q-label"><span class="q-num">4</span>จากรูปภาพผลิตภัณฑ์ดังกล่าว ท่านควรศึกษาข้อมูลใดบ้าง? <small style="font-weight:400;color:#888;">(เลือกได้มากกว่า 1 ข้อ)</small></span>
+    <div class="check-group">
+      <label class="check-item"><input type="checkbox" class="q4" value="ข้อมูลใบอนุญาต/ที่ตั้งสถานที่" /> ข้อมูลใบอนุญาต/ที่ตั้งสถานที่</label>
+      <label class="check-item"><input type="checkbox" class="q4" value="ข้อมูลผลิตภัณฑ์" /> ข้อมูลผลิตภัณฑ์</label>
+      <label class="check-item"><input type="checkbox" class="q4" value="ข้อมูลยาปลอม" /> ข้อมูลยาปลอม</label>
+      <label class="check-item"><input type="checkbox" class="q4" value="ข้อมูลยาไม่มีทะเบียน" /> ข้อมูลยาไม่มีทะเบียน</label>
+    </div>
+  </div>
+
+  <!-- ข้อ 5 -->
+  <div class="card">
+    <span class="q-label"><span class="q-num">5</span>เมื่อศึกษาข้อมูลแล้ว ท่านจะดำเนินการต่อไปอย่างไร?</span>
+    <textarea id="q5" placeholder="อธิบายแผนการดำเนินการ..."></textarea>
+  </div>
+
+  <!-- ข้อ 6 -->
+  <div class="card">
+    <span class="q-label"><span class="q-num">6</span>ท่านต้องเก็บตัวอย่างส่งตรวจวิเคราะห์หรือไม่?</span>
+    <div class="radio-group">
+      <label class="radio-item"><input type="radio" name="q6" value="ส่ง" onchange="toggleQ7()" /> ส่ง</label>
+      <label class="radio-item"><input type="radio" name="q6" value="ไม่ส่ง" onchange="toggleQ7()" /> ไม่ส่ง</label>
+    </div>
+  </div>
+
+  <!-- ข้อ 7 -->
+  <div class="card" id="card_q7">
+    <span class="q-label"><span class="q-num" id="q7_num">7</span>หากท่านเก็บตัวอย่างส่งตรวจวิเคราะห์ ท่านจะวิเคราะห์หาสิ่งใดบ้าง?</span>
+    <textarea id="q7" placeholder="ระบุสิ่งที่ต้องการวิเคราะห์..."></textarea>
+  </div>
+
+  <!-- ข้อ 8 -->
+  <div class="card">
+    <span class="q-label"><span class="q-num">8</span>จากข้อมูลรูปภาพ จงวิเคราะห์ฐานความผิด</span>
+    <div class="inline-fields">
+      <label>พรบ. <input type="text" id="q8_law" placeholder="ชื่อพระราชบัญญัติ" /></label>
+      <label>มาตรา <input type="text" id="q8_section" placeholder="หมายเลขมาตรา" /></label>
+    </div>
+  </div>
+
+  <!-- ข้อ 9 -->
+  <div class="card">
+    <span class="q-label"><span class="q-num">9</span>เมื่อท่านเข้าตรวจสอบแล้ว ควรส่งข้อมูลต่อให้หน่วยงานใด และส่งข้อมูลใดบ้าง?</span>
+    <textarea id="q9" placeholder="ระบุหน่วยงานและข้อมูลที่ต้องส่งต่อ..."></textarea>
+  </div>
+
+  <!-- ข้อ 10 -->
+  <div class="card">
+    <span class="q-label"><span class="q-num">10</span>ท่านมีแผนการดำเนินการขยายผลอย่างไร และกับหน่วยงานใด?</span>
+    <textarea id="q10" placeholder="อธิบายแผนการขยายผล..."></textarea>
+  </div>
+
+  <!-- ข้อ 11 -->
+  <div class="card card-q11">
+    <span class="q-label"><span class="q-num">11</span>จากแบบทดสอบ ท่านจะตั้งชื่อหัวข้อการทดสอบนี้ว่าอย่างไร?</span>
+    <input type="text" id="q11" placeholder="ระบุชื่อหัวข้อที่ท่านคิดว่าเหมาะสม..." />
+  </div>
+
+  <button class="submit-btn" id="submitBtn" onclick="submitForm()">ส่งคำตอบ</button>
+
+</div>
+
+<script>
+  document.getElementById('q3_other_check').addEventListener('change', function () {
+    document.getElementById('q3_other').style.display = this.checked ? 'block' : 'none';
+  });
+
+  function toggleQ7() {
+    const val = document.querySelector('input[name="q6"]:checked')?.value;
+    const card = document.getElementById('card_q7');
+    const textarea = document.getElementById('q7');
+    const numEl = document.getElementById('q7_num');
+
+    if (val === 'ส่ง') {
+      card.classList.remove('disabled');
+      numEl.classList.remove('skipped');
+      const badge = card.querySelector('.skip-badge');
+      if (badge) badge.remove();
+      textarea.disabled = false;
+    } else if (val === 'ไม่ส่ง') {
+      card.classList.add('disabled');
+      numEl.classList.add('skipped');
+      if (!card.querySelector('.skip-badge')) {
+        const badge = document.createElement('span');
+        badge.className = 'skip-badge';
+        badge.textContent = 'ข้ามข้อนี้';
+        numEl.after(badge);
+      }
+      textarea.value = '';
+      textarea.disabled = true;
+    }
+  }  }
+  function showStatus(msg, ok) {
+    const el = document.getElementById('statusMsg');
+    el.textContent = msg;
+    el.className = 'status-msg ' + (ok ? 'status-ok' : 'status-err');
+  }
+
+  function getChecked(cls) {
+    return Array.from(document.querySelectorAll('.' + cls + ':checked')).map(e => e.value).join(', ');
+  }
+
+  function getRadio(name) {
+    const el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : '';
+  }
+
+  async function submitForm() {
+    const url = 'https://script.google.com/macros/s/AKfycbzvOHD_lIKZi3v0ZNr1rtmDBeSGvx4hakuLHE_EAGQTPC-uvOhSoaTFAzbg2o01l0SwlQ/exec';
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'กำลังส่ง...';
+
+    let q3 = getChecked('q3');
+    const otherCheck = document.getElementById('q3_other_check').checked;
+    if (otherCheck) {
+      const otherVal = document.getElementById('q3_other').value.trim();
+      if (otherVal) q3 = q3 ? q3 + ', ' + otherVal : otherVal;
+    }
+
+    const q6val = getRadio('q6');
+
+    const data = {
+      timestamp: new Date().toLocaleString('th-TH'),
+      q1_name: document.getElementById('q1_name').value,
+      q1_position: document.getElementById('q1_position').value,
+      q1_unit: document.getElementById('q1_unit').value,
+      q2_product: document.getElementById('q2_product').value,
+      q2_lot: document.getElementById('q2_lot').value,
+      q2_mfg: document.getElementById('q2_mfg').value,
+      q2_exp: document.getElementById('q2_exp').value,
+      q2_holo: getRadio('q2_holo'),
+      q3_channels: q3,
+      q4_data: getChecked('q4'),
+      q5: document.getElementById('q5').value,
+      q6: q6val,
+      q7: q6val === 'ส่ง' ? document.getElementById('q7').value : '(ข้าม)',
+      q8_law: document.getElementById('q8_law').value,
+      q8_section: document.getElementById('q8_section').value,
+      q9: document.getElementById('q9').value,
+      q10: document.getElementById('q10').value,
+      q11: document.getElementById('q11').value,
+    };
+
+    try {
+      await fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      showStatus('ส่งคำตอบสำเร็จ! ข้อมูลถูกบันทึกลง Google Sheet แล้ว', true);
+      btn.textContent = 'ส่งคำตอบแล้ว';
+    } catch (e) {
+      showStatus('เกิดข้อผิดพลาด: ' + e.message, false);
+      btn.disabled = false;
+      btn.textContent = 'ส่งคำตอบ';
+    }
+  }
+</script>
+</body>
+</html>
