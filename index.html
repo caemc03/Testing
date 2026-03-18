@@ -288,7 +288,7 @@
   });
 
   function toggleQ7() {
-    const val = document.querySelector('input[name="q6"]:checked')?.value;
+    const val = document.getElementById('q6_send')?.checked ? 'ส่ง' : (document.getElementById('q6_nosend')?.checked ? 'ไม่ส่ง' : null);
     const card = document.getElementById('card_q7');
     const textarea = document.getElementById('q7');
     const numEl = document.getElementById('q7_num');
@@ -329,7 +329,7 @@
   }
 
   async function submitForm() {
-    const url = 'https://script.google.com/macros/s/AKfycbyJopvjGdG9UzP_NGDxPI6dnid7jEb0DdlFPFeXBfC1/dev';
+    const url = 'https://script.google.com/macros/s/AKfycbwyeoj__IsPSj_vcnzeikZfuthBlmaJzEX4j-49c1xG6iwyBC-k4Igc6r33rhsaS8u_aQ/exec';
 
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
@@ -342,7 +342,10 @@
       if (otherVal) q3 = q3 ? q3 + ', ' + otherVal : otherVal;
     }
 
-    const q6val = getRadio('q6');
+    const q6send = document.getElementById('q6_send').checked;
+    const q6nosend = document.getElementById('q6_nosend').checked;
+    const q6val = [q6send ? 'ส่ง' : '', q6nosend ? 'ไม่ส่ง' : ''].filter(Boolean).join(', ');
+    const q6reason = document.getElementById('q6_reason').value;
 
     const data = {
       timestamp: new Date().toLocaleString('th-TH'),
@@ -359,7 +362,8 @@
       q4_data: getChecked('q4'),
       q5: document.getElementById('q5').value,
       q6: q6val,
-      q7: q6val === 'ส่ง' ? document.getElementById('q7').value : '(ข้าม)',
+      q6_reason: q6reason,
+      q7: q6send ? document.getElementById('q7').value : '(ข้าม)',
       q8_law: document.getElementById('q8_law').value,
       q8_section: document.getElementById('q8_section').value,
       q9: document.getElementById('q9').value,
