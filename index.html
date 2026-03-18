@@ -72,7 +72,7 @@
     }
     input[type="text"] { height: 40px; }
     textarea { resize: vertical; min-height: 72px; }
-    .inline-fields { display: flex; gap: 10px; flex-wrap: wrap; }
+    .inline-fields { display: flex; gap: 10px; flex-wrap: wrap; width: 100%; }
     .inline-fields label {
       font-size: 12px;
       color: #555;
@@ -229,7 +229,7 @@
       <label class="check-item"><input type="checkbox" id="q6_send" onchange="toggleQ7()" /> ส่ง</label>
       <label class="check-item"><input type="checkbox" id="q6_nosend" onchange="toggleQ7()" /> ไม่ส่ง</label>
     </div>
-    <textarea id="q6_reason" placeholder="ระบุเหตุผล..." style="margin-top:10px;"></textarea>  
+    <textarea id="q6_reason" placeholder="ระบุเหตุผล..." style="margin-top:10px;"></textarea>
   </div>
 
   <!-- ข้อ 7 -->
@@ -243,7 +243,8 @@
     <span class="q-label"><span class="q-num">8</span>จากข้อมูลข้อ 2 - 7 จงวิเคราะห์ว่าเป็นฐานความผิดใด</span>
     <div class="inline-fields">
       <label>พรบ. <input type="text" id="q8_law" placeholder="ชื่อพระราชบัญญัติ" /></label>
-      <label>มาตรา <input type="text" id="q8_section" placeholder="หมายเลขมาตรา" /></label>    
+      <label>มาตรา <input type="text" id="q8_section" placeholder="หมายเลขมาตรา" /></label>
+    </div>
   </div>
 
   <!-- ข้อ 9 -->
