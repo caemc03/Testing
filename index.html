@@ -225,9 +225,11 @@
   <!-- ข้อ 6 -->
   <div class="card">
     <span class="q-label"><span class="q-num">6</span>ท่านจะดำเนินการเก็บตัวอย่างส่งตรวจวิเคราะห์หรือไม่ พร้อมระบุเหตุผล</span>
-    <div class="radio-group">
-      <label class="radio-item"><input type="radio" name="q6" value="ส่ง" onchange="toggleQ7()" /> ส่ง</label>
-      <label class="radio-item"><input type="radio" name="q6" value="ไม่ส่ง" onchange="toggleQ7()" /> ไม่ส่ง</label>
+    <div class="check-group">
+      <label class="check-item"><input type="checkbox" id="q6_send" onchange="toggleQ7()" /> ส่ง</label>
+      <label class="check-item"><input type="checkbox" id="q6_nosend" onchange="toggleQ7()" /> ไม่ส่ง</label>
+    </div>
+    <textarea id="q6_reason" placeholder="ระบุเหตุผล..." style="margin-top:10px;"></textarea>
     </div>
   </div>
 
